@@ -42,7 +42,7 @@ export const popupTypes = {
   NOT_ENOUGH_DURATION: {
     markup: `
     <div class="popup">
-      <p class="popup__content">操作过快，每次抽奖请间隔10秒后再操作</p>
+      <p class="popup__content">操作过快，每次抽奖请间隔5秒后再操作</p>
       <button id="popupButton" class="popup__button">确定</button>
     </div>
     `,

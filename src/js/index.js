@@ -87,7 +87,7 @@ const start = () => {
 
   // 如果抽獎間隔小於十秒，顯示彈出視窗「操作过快，每次抽奖请间隔10秒后再操作」
   const now = Date.now()
-  if (lastTime && now - lastTime < 10000) {
+  if (lastTime && now - lastTime < 5000) {
     return renderPopup(popupTypes.NOT_ENOUGH_DURATION)
   }
 

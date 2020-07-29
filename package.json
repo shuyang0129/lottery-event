@@ -33,7 +33,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.10.4"
+    "@babel/polyfill": "^7.10.4",
+    "axois": "0.0.1-security"
   },
   "browserslist": [
     "> 1%",

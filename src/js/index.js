@@ -14,7 +14,7 @@ import { prizesDate } from '../data'
 
 // 關於獎項的設定
 let prizes = prizesDate
-let targetPrizeId = '2350'
+let targetPrizeId = '8'
 let numberAwards = 3 // 抽獎剩餘次數
 let eventInfo = {
   time: '2020年',

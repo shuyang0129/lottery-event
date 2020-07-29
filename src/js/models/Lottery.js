@@ -3,13 +3,11 @@
  * @description
  * 提供九宮格基本的操作：
  * 亮燈、熄燈、點亮下一個燈、Reset、增加index、判斷是否在有效index範圍
- * @param {Array} prizes 傳入8個獎項
  */
 
 export default class Lottery {
-  constructor(prizes) {
-    this.prizes = prizes
-    this.length = this.prizes.length
+  constructor() {
+    this.length = 8
     this.currentOrder = -1
   }
 

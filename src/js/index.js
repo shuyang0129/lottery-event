@@ -6,13 +6,23 @@ import {
   renderNumberAwards,
   renderMemberId,
   renderPrizes,
+  renderEventInfo,
 } from './views/lotteryView'
 import { popupTypes } from './views/popupView'
+// 假資料
+import { prizesArr } from '../data'
 
 // 關於獎項的設定
-const prizes = ['$100', '$200', '$300', '$400', '$500', '$600', '$700', '$800'] // 8個獎項
+let prizes = ['$100', '$200', '$300', '$400', '$500', '$600', '$700', '$800'] // 8個獎項
+// let prizes
+// let targetedPrzeId = '2351'
 const targetedPrize = '$200' // 指定獎項
 let numberAwards = 3 // 抽獎剩餘次數
+let eventInfo = {
+  time: '2020年',
+  target: '全体用户',
+  platform: '全平台<br/>(不含彩票平台)',
+}
 // 九宮格的設定
 const PRIZES_LENGTH = 8 // 一圈八格
 const minSteps = PRIZES_LENGTH * 3 // 前半段步數(單位為圈)
@@ -25,13 +35,15 @@ let lastTime // 抽獎時間
 let memberId = 'member002' // 會員帳號
 let isLogin = true // 使用者是否登入
 
-const lottery = new Lottery(prizes)
+const lottery = new Lottery()
 
 // 畫面剛載入，渲染對應畫面
 window.addEventListener('load', () => {
+  // prizes = prizesArr
   renderNumberAwards(numberAwards) // 更新畫面 - 九宮格
   renderMemberId(memberId) // 更新畫面 - 會員帳號
   renderPrizes(prizes) // 更新畫面 - 抽獎機會
+  renderEventInfo(eventInfo) // 更新畫面 - 活動資訊：活動日期、活動目標、活動平台
 
   // 如果載入時，沒有抽獎機會，顯示彈出視窗：「今日已無抽獎次數」
   if (numberAwards <= 0) renderPopup(popupTypes.NO_NUMBER_OF_AWARDS)

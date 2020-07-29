@@ -6,6 +6,9 @@ export const popupContainer = document.querySelector('#popupContainer')
 export const popupMask = document.querySelector('#popupMask')
 export const numberAwards = document.querySelector('#numberAwards')
 export const memberId = document.querySelector('#memberId')
+export const eventTime = document.querySelector('#eventTime')
+export const eventTarget = document.querySelector('#eventTarget')
+export const eventPlatform = document.querySelector('#eventPlatform')
 
 // Lottery Box | 對應的燈箱
 export const lotteryBox = order => {

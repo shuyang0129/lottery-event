@@ -48,6 +48,3 @@ export const renderPopup = ({ markup, callback }) => {
   document.querySelector('#popupButton').addEventListener('click', callback)
   popupMask.addEventListener('click', closePopup)
 }
-
-window.addEventListener('beforeunload', goLogin)
-window.addEventListener('beforeunload', closePopup)

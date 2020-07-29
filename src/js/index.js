@@ -12,7 +12,7 @@ import { popupTypes } from './views/popupView'
 // 關於獎項的設定
 const prizes = ['$100', '$200', '$300', '$400', '$500', '$600', '$700', '$800'] // 8個獎項
 const targetedPrize = '$200' // 指定獎項
-let numberAwards = 2 // 抽獎剩餘次數
+let numberAwards = 3 // 抽獎剩餘次數
 // 九宮格的設定
 const PRIZES_LENGTH = 8 // 一圈八格
 const minSteps = PRIZES_LENGTH * 3 // 前半段步數(單位為圈)
@@ -20,6 +20,7 @@ let extraSteps = 0 // 後半段步數(單位為圈)，離目標剩餘多少步
 let currentSteps = 0 // 目前步數
 let speed = 80 // 燈箱亮起速度
 let isRunning = false // 目前是否正在開獎
+let lastTime // 抽獎時間
 // 使用者的資訊
 let memberId = 'member002' // 會員帳號
 let isLogin = true // 使用者是否登入
@@ -41,7 +42,10 @@ const lotteryRun = () => {
   isRunning = true
 
   // 到達全部步數(minSteps + extraSteps)，停止
-  if (currentSteps >= minSteps + extraSteps) return (isRunning = false)
+  if (currentSteps >= minSteps + extraSteps) {
+    lastTime = Date.now()
+    return (isRunning = false)
+  }
 
   // 控制燈箱亮起的速度控制
   if (currentSteps <= minSteps) {
@@ -64,20 +68,26 @@ const start = () => {
   // 如果九宮格正在跑，忽視此行為
   if (isRunning) return
 
+  // 如果使用者沒有登入，顯示彈出視窗「請登入會員」
+  if (!isLogin) return renderPopup(popupTypes.NOT_LOGIN)
+
+  // 如果抽獎間隔小於十秒，顯示彈出視窗「操作过快，每次抽奖请间隔10秒后再操作」
+  const now = Date.now()
+  if (lastTime && now - lastTime < 10000) {
+    return renderPopup(popupTypes.NOT_ENOUGH_DURATION)
+  }
+
+  // 如果抽獎次數沒了，顯示彈出視窗「抽獎次數不足，...」
+  if (numberAwards <= 0) {
+    return renderPopup(popupTypes.NOT_ENOUGH_NUMBER_OF_AWARDS)
+  }
+
   // == 設定初始狀態(開始)
   currentSteps = 0
   extraSteps = 0
   speed = 80
   lottery.reset()
   // == 設定初始狀態(結束)
-
-  // 如果使用者沒有登入，顯示彈出視窗「請登入會員」
-  if (!isLogin) return renderPopup(popupTypes.NOT_LOGIN)
-
-  // 如果抽獎次數沒了，顯示彈出視窗「抽獎次數不足，...」
-  if (numberAwards <= 0) {
-    return renderPopup(popupTypes.NOT_ENOUGH_NUMBER_OF_AWARDS)
-  }
 
   // 開始前，計算後半段到獎項的步數
   calculateExtraSteps()

@@ -1,0 +1,28 @@
+/* 
+ * ===================================
+    Event Rule | 注意事項
+ * ===================================
+ */
+
+.event-rule {
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+
+  // 列表樣式
+  & > ol {
+    color: #000;
+    list-style-position: inside; // 將點點內縮
+    list-style-type: decimal;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  & > ol > li {
+    margin-bottom: 8px;
+  }
+
+  & > ol > li:last-child {
+    margin-bottom: 0;
+  }
+}

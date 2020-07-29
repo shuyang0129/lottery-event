@@ -1,0 +1,44 @@
+/* 
+ * ===================================
+    Base
+ * ===================================
+ */
+
+html {
+  font-size: $rootValue;
+  font-family: PingFangSC;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+hr {
+  display: block;
+  overflow: auto;
+  border-width: 0;
+  border-style: inset;
+  unicode-bidi: isolate;
+
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+body {
+  background: #fff;
+}
+
+/* Reset Button Style */
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  /* show a hand cursor on hover; some argue that we
+  should keep the default arrow cursor for buttons */
+  cursor: pointer;
+}

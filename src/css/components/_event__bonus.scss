@@ -1,0 +1,31 @@
+/* 
+ * ===================================
+    Event Bonus | 獎勵內容
+ * ===================================
+ */
+
+.event-bonus__table {
+  width: 100%;
+  border-spacing: 0 4px;
+  border-collapse: separate;
+
+  & th, & td {
+    padding: 8px;
+    color: #000;
+    text-align: center;
+    font-size: 11px;
+  }
+
+  & th {
+    background-color: #f38844;
+    color: #fff;
+  }
+
+  & tr th:first-child {
+    width: 62%;
+  }
+
+  & td {
+    background-color: #fef9f3;
+  }
+}

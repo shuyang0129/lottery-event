@@ -1,0 +1,26 @@
+/* 
+ * ===================================
+    Subtitle | 副標題(左右有錢幣)
+ * ===================================
+ */
+
+.subtitle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  color: #f38844;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.subtitle::before, .subtitle::after {
+  margin: 0 8px;
+  width: 43px;
+  height: 18px;
+  background: transparent url('../img/coins.svg') no-repeat center;
+  background-size: contain;
+  content: '';
+}

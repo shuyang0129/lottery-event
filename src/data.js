@@ -1,5 +1,5 @@
 // 獎項陣列 - 假資料
-export const prizesArr = [
+export const prizesDate = [
   {
     id: '2349',
     createTime: '2020-07-29 12:18:25',
@@ -14,7 +14,7 @@ export const prizesArr = [
     prizeNum: '1',
   },
   {
-    id: '2351',
+    id: '2350',
     createTime: '2020-07-29 12:18:25',
     createBy: 1,
     rechargeMoney: 10000.0,
@@ -28,7 +28,7 @@ export const prizesArr = [
     prizeNum: '2',
   },
   {
-    id: '2352',
+    id: '2351',
     createTime: '2020-07-29 12:18:25',
     createBy: 1,
     rechargeMoney: 0.0,
@@ -41,7 +41,7 @@ export const prizesArr = [
     prizeNum: '3',
   },
   {
-    id: '2353',
+    id: '2352',
     createTime: '2020-07-29 12:18:25',
     createBy: 1,
     rechargeMoney: 10000.0,
@@ -55,7 +55,7 @@ export const prizesArr = [
     prizeNum: '4',
   },
   {
-    id: '2354',
+    id: '2353',
     createTime: '2020-07-29 12:18:25',
     createBy: 1,
     rechargeMoney: 0.0,
@@ -68,7 +68,7 @@ export const prizesArr = [
     prizeNum: '5',
   },
   {
-    id: '2355',
+    id: '2354',
     createTime: '2020-07-29 12:18:25',
     createBy: 1,
     rechargeMoney: 10000.0,
@@ -82,7 +82,7 @@ export const prizesArr = [
     prizeNum: '6',
   },
   {
-    id: '2356',
+    id: '2355',
     createTime: '2020-07-29 12:18:25',
     createBy: 1,
     rechargeMoney: 0.0,
@@ -95,7 +95,7 @@ export const prizesArr = [
     prizeNum: '7',
   },
   {
-    id: '2357',
+    id: '2356',
     createTime: '2020-07-29 12:18:25',
     createBy: 1,
     rechargeMoney: 10000.0,

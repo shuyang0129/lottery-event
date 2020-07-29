@@ -10,13 +10,11 @@ import {
 } from './views/lotteryView'
 import { popupTypes } from './views/popupView'
 // 假資料
-import { prizesArr } from '../data'
+import { prizesDate } from '../data'
 
 // 關於獎項的設定
-let prizes = ['$100', '$200', '$300', '$400', '$500', '$600', '$700', '$800'] // 8個獎項
-// let prizes
-// let targetedPrzeId = '2351'
-const targetedPrize = '$200' // 指定獎項
+let prizes = prizesDate
+let targetPrizeId = '2350'
 let numberAwards = 3 // 抽獎剩餘次數
 let eventInfo = {
   time: '2020年',
@@ -39,7 +37,6 @@ const lottery = new Lottery()
 
 // 畫面剛載入，渲染對應畫面
 window.addEventListener('load', () => {
-  // prizes = prizesArr
   renderNumberAwards(numberAwards) // 更新畫面 - 九宮格
   renderMemberId(memberId) // 更新畫面 - 會員帳號
   renderPrizes(prizes) // 更新畫面 - 抽獎機會
@@ -83,15 +80,15 @@ const start = () => {
   // 如果使用者沒有登入，顯示彈出視窗「請登入會員」
   if (!isLogin) return renderPopup(popupTypes.NOT_LOGIN)
 
+  // 如果抽獎次數沒了，顯示彈出視窗「抽獎次數不足，...」
+  if (numberAwards <= 0) {
+    return renderPopup(popupTypes.NOT_ENOUGH_NUMBER_OF_AWARDS)
+  }
+
   // 如果抽獎間隔小於十秒，顯示彈出視窗「操作过快，每次抽奖请间隔10秒后再操作」
   const now = Date.now()
   if (lastTime && now - lastTime < 10000) {
     return renderPopup(popupTypes.NOT_ENOUGH_DURATION)
-  }
-
-  // 如果抽獎次數沒了，顯示彈出視窗「抽獎次數不足，...」
-  if (numberAwards <= 0) {
-    return renderPopup(popupTypes.NOT_ENOUGH_NUMBER_OF_AWARDS)
   }
 
   // == 設定初始狀態(開始)
@@ -102,7 +99,7 @@ const start = () => {
   // == 設定初始狀態(結束)
 
   // 開始前，計算後半段到獎項的步數
-  calculateExtraSteps()
+  calculateExtraSteps(prizes, targetPrizeId)
 
   // 執行開獎
   lotteryRun()
@@ -111,17 +108,15 @@ const start = () => {
 }
 
 // 計算到指定獎項的額外步數
-const calculateExtraSteps = () => {
-  if (targetedPrize && prizes.includes(targetedPrize)) {
-    return (extraSteps += prizes.indexOf(targetedPrize) + lottery.length) // lottery.length代表一圈
-  }
-  // 沒有指定獎項的話，隨機產生
-  const randomSteps = generateRandomPrize()
-  return (extraSteps += randomSteps + lottery.length)
-}
+const calculateExtraSteps = (prizes, targetId) => {
+  const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
+  const onlyIds = ({ id }) => id
 
-const generateRandomPrize = () => {
-  return Math.floor(Math.random() * lottery.length)
+  const ids = prizes.sort(sortByPrizeNum).map(onlyIds)
+
+  if (targetId && ids.includes(targetId)) {
+    return (extraSteps += ids.indexOf(targetId) + PRIZES_LENGTH * 1) // PRIZES_LENGTH代表一圈
+  }
 }
 
 // 點擊「開始」按鈕的行為定義

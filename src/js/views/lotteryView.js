@@ -19,9 +19,14 @@ export const renderMemberId = id => {
 
 // 渲染九宮格
 export const renderPrizes = prizes => {
-  for (let order = 0; order < prizes.length; order++) {
-    lotteryBox(order).src = `./img/lottery-box-${order}.png`
-  }
+  const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
+  const onlyIds = ({ id }) => id
+
+  const ids = prizes.sort(sortByPrizeNum).map(onlyIds)
+
+  ids.forEach(
+    (id, order) => (lotteryBox(order).src = `./img/lottery-box-${id}.png`)
+  )
 }
 
 // 渲染活動資訊 | 活動日期、活動目標、活動平台

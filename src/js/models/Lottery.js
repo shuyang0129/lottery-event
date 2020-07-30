@@ -6,7 +6,8 @@
  */
 
 export default class Lottery {
-  constructor() {
+  constructor(prizes) {
+    this.prizes = prizes
     this.length = 8
     this.currentOrder = -1
   }
@@ -40,5 +41,18 @@ export default class Lottery {
 
   get isValidOrder() {
     return this.currentOrder >= 0 && this.currentOrder < this.length
+  }
+
+  get sortedPrizes() {
+    const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
+    return this.prizes.sort(sortByPrizeNum)
+    // return this.prizes
+  }
+
+  get sortedIds() {
+    const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
+    const onlyIds = ({ id }) => id
+
+    if (this.prizes) return this.prizes.sort(sortByPrizeNum).map(onlyIds)
   }
 }

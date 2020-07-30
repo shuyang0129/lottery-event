@@ -33,13 +33,13 @@ let lastTime // 抽獎時間
 let memberId = 'member002' // 會員帳號
 let isLogin = true // 使用者是否登入
 
-const lottery = new Lottery()
+const lottery = new Lottery(prizes)
 
 // 畫面剛載入，渲染對應畫面
 window.addEventListener('load', () => {
   renderNumberAwards(numberAwards) // 更新畫面 - 九宮格
   renderMemberId(memberId) // 更新畫面 - 會員帳號
-  renderPrizes(prizes) // 更新畫面 - 抽獎機會
+  renderPrizes(lottery.sortedIds) // 更新畫面 - 抽獎機會
   renderEventInfo(eventInfo) // 更新畫面 - 活動資訊：活動日期、活動目標、活動平台
 
   // 如果載入時，沒有抽獎機會，顯示彈出視窗：「今日已無抽獎次數」
@@ -99,7 +99,7 @@ const start = () => {
   // == 設定初始狀態(結束)
 
   // 開始前，計算後半段到獎項的步數
-  calculateExtraSteps(prizes, targetPrizeId)
+  calculateExtraSteps(lottery.sortedIds, targetPrizeId)
 
   // 執行開獎
   lotteryRun()
@@ -108,14 +108,9 @@ const start = () => {
 }
 
 // 計算到指定獎項的額外步數
-const calculateExtraSteps = (prizes, targetId) => {
-  const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
-  const onlyIds = ({ id }) => id
-
-  const ids = prizes.sort(sortByPrizeNum).map(onlyIds)
-
-  if (targetId && ids.includes(targetId)) {
-    return (extraSteps += ids.indexOf(targetId) + PRIZES_LENGTH * 1) // PRIZES_LENGTH代表一圈
+const calculateExtraSteps = (prizeIds, targetId) => {
+  if (targetId && prizeIds.includes(targetId)) {
+    return (extraSteps += prizeIds.indexOf(targetId) + PRIZES_LENGTH * 1) // PRIZES_LENGTH代表一圈
   }
 }
 

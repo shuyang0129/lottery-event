@@ -18,13 +18,8 @@ export const renderMemberId = id => {
 }
 
 // 渲染九宮格
-export const renderPrizes = prizes => {
-  const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
-  const onlyIds = ({ id }) => id
-
-  const ids = prizes.sort(sortByPrizeNum).map(onlyIds)
-
-  ids.forEach(
+export const renderPrizes = prizesIds => {
+  prizesIds.forEach(
     (id, order) => (lotteryBox(order).src = `./img/lottery-box-${id}.png`)
   )
 }

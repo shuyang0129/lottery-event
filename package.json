@@ -23,7 +23,6 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "postcss-loader": "^3.0.0",
-    "px2rem-loader": "^0.1.9",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
@@ -34,7 +33,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
-    "axois": "0.0.1-security"
+    "axois": "0.0.1-security",
+    "postcss-plugin-px2rem": "^0.8.1"
   },
   "browserslist": [
     "> 1%",

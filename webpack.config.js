@@ -23,6 +23,7 @@ module.exports = {
       template: './src/index.html',
     }),
     new CopyPlugin({
+      // 當img/資料夾，原封不動複製到打包後的dist/資料夾裡
       patterns: [{ from: './src/img', to: 'img' }],
     }),
   ],

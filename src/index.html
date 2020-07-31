@@ -41,18 +41,16 @@
         </div>
         <!-- Lottery -->
         <div class="lottery">
-          <!-- Lottery Info | 會員帳號、抽獎機會 -->
-          <div class="lottery__header">
-            <span class="lottery__info"
-              >会员帐号：<span id="memberId"></span
-            ></span>
-            <span class="lottery__info"
-              >您有
-              <span id="numberAwards" class="lottery__info_count"></span>
-              次抽奖机会！</span
-            >
-          </div>
           <div class="lottery__main">
+            <!-- Lottery Info | 會員帳號 -->
+            <div class="lottery__info_account">
+              <span id="memberId">请登入会员</span>
+              <button id="myAwards">我的奖品</button>
+            </div>
+            <!-- Lottery Info | 抽獎機會 -->
+            <div class="lottery__info_count">
+              您有<span id="numberAwards">0</span>次抽奖机会！
+            </div>
             <div class="lottery-game__container">
               <div class="lottery-game__container_inner grid">
                 <img

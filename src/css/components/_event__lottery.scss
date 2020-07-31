@@ -10,43 +10,78 @@
   margin: 0 -25px;
 }
 
-// Lottery Header | 會員帳號、抽獎次數
-.lottery__header {
-  display: flex;
-  align-items: center;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  padding: 20px 25px 8px;
-}
-
-.lottery__header > .lottery__info {
-  color: #000;
-  font-weight: medium;
-  font-size: 11px;
-}
-
-.lottery__info > .lottery__info_count {
-  color: #f00;
-}
-
 // 九宮格容器 | main: 展示背景圖片、game container: 放置九宮格容器(對應背景圖片的位置)
 .lottery__main {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: calc(390 / 375 * 100%);
+  padding-top: calc(492 / 375 * 100%);
   width: 100%;
   background: #fff url('../img/lottery.png') no-repeat center;
   background-size: contain;
 
-  .lottery-game__container {
+  // 九宮格資訊 | 幾次抽獎機會
+  .lottery__info_count {
     position: absolute;
     top: 8%;
+    right: 8%;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: center;
+    padding: 0 8px;
+    width: 37%;
+    height: 8%;
+    color: #fff;
+    text-align: right;
+    font-weight: 500;
+    font-size: 11px;
+
+    // 讓API放置剩餘抽獎次數的位置
+    #numberAwards {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  // 九宮格資訊 | 會員資訊(會員帳號、請登入會員)、查詢我的獎品的按鈕
+  .lottery__info_account {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    display: flex;
+    align-items: start;
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 100%;
+    height: 6%;
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+
+    // 會員資訊 | 登入時：會員帳號、未登入時：顯示「請登入會員」
+    #memberId {
+      margin-bottom: 1%;
+      color: #000;
+    }
+
+    // 查詢「我的獎品」的按鈕
+    #myAwards {
+      color: #f38844;
+    }
+  }
+
+  // 放置九宮格的內容器
+  .lottery-game__container {
+    position: absolute;
+    top: 21%;
     left: 12%;
     overflow: hidden;
     width: 76%;
-    height: 73%;
+    height: 58%;
     border-radius: 3%;
   }
 }

@@ -13,8 +13,8 @@ export const renderNumberAwards = num => {
 }
 
 // 渲染會員帳號
-export const renderMemberId = id => {
-  memberId.textContent = id
+export const renderMemberId = (id, isLogin = false) => {
+  memberId.textContent = isLogin ? `会员帐号：${id}` : '请登入会员'
 }
 
 // 渲染九宮格

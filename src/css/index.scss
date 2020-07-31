@@ -32,7 +32,10 @@
 // Popup
 @import 'components/popup';
 
-// Event Container | 最外層容易
+// Event
+@import 'components/event';
+
+// Event Container
 @import 'components/event__container';
 
 // Event Info | 活動日期、活動目標、活動平台
@@ -49,3 +52,6 @@
 
 // Event Rule | 注意事項
 @import 'components/event__rule';
+
+// Loading | 加載畫面
+@import 'components/loading';

@@ -1,7 +1,12 @@
 import '../css/index.scss'
 import Lottery from './models/Lottery'
 import { renderPopup } from './views/popupView'
-import { startButton } from './views/base'
+import {
+  startButton,
+  renderPage,
+  renderLoader,
+  clearLoader,
+} from './views/base'
 import {
   renderNumberAwards,
   renderMemberId,
@@ -11,11 +16,12 @@ import {
 import { popupTypes } from './views/popupView'
 // 假資料
 import { prizesDate } from '../data'
+import * as API from './services/api'
 
 // 關於獎項的設定
 let prizes = prizesDate
 let targetPrizeId = '8'
-let numberAwards = 3 // 抽獎剩餘次數
+let numberAwards = -1 // 抽獎剩餘次數
 let eventInfo = {
   time: '2020年',
   target: '全体用户',
@@ -32,18 +38,38 @@ let lastTime // 抽獎時間
 // 使用者的資訊
 let memberId = 'member002' // 會員帳號
 let isLogin = true // 使用者是否登入
+// Query String
+const query = {}
 
 const lottery = new Lottery(prizes)
 
 // 畫面剛載入，渲染對應畫面
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
+  renderLoader()
+  // 取得Query String
+  const urlParams = new URLSearchParams(window.location.search)
+  for (const [key, value] of urlParams.entries()) {
+    query[key] = value
+  }
+  console.log(query)
+
+  const [playerInfo, lotteryInfo] = await Promise.all([
+    API.getPlayerDrawInfo(query.actId, query.token),
+    API.getSearchActivityPageInformation(query.actId),
+  ])
+
+  await API.draw(query.actId, Date.now(), query.token)
+
+  clearLoader()
+  renderPage()
+
   renderNumberAwards(numberAwards) // 更新畫面 - 九宮格
   renderMemberId(memberId) // 更新畫面 - 會員帳號
   renderPrizes(lottery.sortedIds) // 更新畫面 - 抽獎機會
   renderEventInfo(eventInfo) // 更新畫面 - 活動資訊：活動日期、活動目標、活動平台
 
   // 如果載入時，沒有抽獎機會，顯示彈出視窗：「今日已無抽獎次數」
-  if (numberAwards <= 0) renderPopup(popupTypes.NO_NUMBER_OF_AWARDS)
+  if (numberAwards === 0) renderPopup(popupTypes.NO_NUMBER_OF_AWARDS)
 })
 
 const lotteryRun = () => {

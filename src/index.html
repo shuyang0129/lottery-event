@@ -6,171 +6,175 @@
     <title>聚享九宫揽盛宴</title>
   </head>
   <body>
-    <!-- Hero Image -->
-    <img src="img/hero-img.png" alt="heor" class="hero-img" />
-    <!-- Main Content -->
-    <main class="event__container">
-      <!-- Event Info | 活動日期、活動目標、活動平台 -->
-      <div class="event-info__container">
-        <div class="event-info">
-          <h3 class="event-info__title">活动日期</h3>
-          <div id="eventTime" class="event-info__description">2020年</div>
-        </div>
-        <div class="event-info">
-          <h3 class="event-info__title">活动目标</h3>
-          <div id="eventTarget" class="event-info__description">全体用户</div>
-        </div>
-        <div class="event-info">
-          <h3 class="event-info__title">活动平台</h3>
-          <div id="eventPlatform" class="event-info__description">
-            全平台<br />(不含彩票平台)
+    <div id="event">
+      <!-- Hero Image -->
+      <img src="img/hero-img.png" alt="heor" class="hero-img" />
+      <!-- Main Content -->
+      <main class="event__container">
+        <!-- Event Info | 活動日期、活動目標、活動平台 -->
+        <div class="event-info__container">
+          <div class="event-info">
+            <h3 class="event-info__title">活动日期</h3>
+            <div id="eventTime" class="event-info__description">2020年</div>
           </div>
-        </div>
-      </div>
-      <div class="event-content__container">
-        <div class="event-content__header">
-          <hr />
-          <h3 class="event-content__title">活动内容</h3>
-          <hr />
-        </div>
-        <p class="event-content">
-          活动期间，用户于单日累计有效投注5888元可累计抽奖次数1次，并获得58元彩金奖励，还能参与九宫抽大奖活动，就有机会将
-          iPhone 11带回家。(每日最多3次，累计次数每日归零)
-        </p>
-      </div>
-      <!-- Lottery -->
-      <div class="lottery">
-        <!-- Lottery Info | 會員帳號、抽獎機會 -->
-        <div class="lottery__header">
-          <span class="lottery__info"
-            >会员帐号：<span id="memberId"></span
-          ></span>
-          <span class="lottery__info"
-            >您有
-            <span id="numberAwards" class="lottery__info_count"></span>
-            次抽奖机会！</span
-          >
-        </div>
-        <div class="lottery__main">
-          <div class="lottery-game__container">
-            <div class="lottery-game__container_inner grid">
-              <img
-                data-order="0"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
-              <img
-                data-order="1"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
-              <img
-                data-order="2"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
-              <img
-                data-order="7"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
-              <img
-                id="startButton"
-                class="lottery-box__button is-active"
-                src="img/lottery-box__button.png"
-                alt="lottery prize"
-              />
-              <img
-                data-order="3"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
-              <img
-                data-order="6"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
-              <img
-                data-order="5"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
-              <img
-                data-order="4"
-                class="lottery-box"
-                src="./img/lottery-box-5.png"
-                alt="lottery prize"
-              />
+          <div class="event-info">
+            <h3 class="event-info__title">活动目标</h3>
+            <div id="eventTarget" class="event-info__description">全体用户</div>
+          </div>
+          <div class="event-info">
+            <h3 class="event-info__title">活动平台</h3>
+            <div id="eventPlatform" class="event-info__description">
+              全平台<br />(不含彩票平台)
             </div>
           </div>
         </div>
-      </div>
-      <div class="event-bonus">
-        <div class="subtitle">奖励内容</div>
-        <!-- Event Bonus | 獎勵內容表格(品項、價值) -->
-        <table class="event-bonus__table" cellspacing="20">
-          <tr>
-            <th>奖励内容</th>
-            <th>奖励价值</th>
-          </tr>
-          <tr>
-            <td>IPhone 11 64GB</td>
-            <td>5499元</td>
-          </tr>
-          <tr>
-            <td>华为 HUAWEI P30 8GB+128GB</td>
-            <td>3288元</td>
-          </tr>
-          <tr>
-            <td>Apple AirPods Pro</td>
-            <td>1999元</td>
-          </tr>
-          <tr>
-            <td>OG订制感恩礼包</td>
-            <td>888元</td>
-          </tr>
-          <tr>
-            <td>588元</td>
-            <td>588元</td>
-          </tr>
-          <tr>
-            <td>288元</td>
-            <td>288元</td>
-          </tr>
-          <tr>
-            <td>88元</td>
-            <td>88元</td>
-          </tr>
-          <tr>
-            <td>8元</td>
-            <td>8元</td>
-          </tr>
-        </table>
-      </div>
-      <!-- Event Rule | 抽獎注意事項 -->
-      <div class="event-rule">
-        <div class="subtitle">注意事项</div>
-        <ol>
-          <li>活动彩金系统自动派发至用户游戏账号，仅需完成2倍流水即可提款。</li>
-          <li>
-            实物奖励需联系客服申请，请用户至官网完善您的个人信息(银行卡、手机号以及邮箱号，邮寄地址信息（省→市→区（乡）→街道（村）→小区（组）→楼号→单元→门牌号）以便安排派送。
-          </li>
-          <li>本活动所需投注不与其他活动共享。</li>
-          <li>
-            每位用户每日可以获得所获彩金0.5%的积分奖励（取整数，非四舍五入），所获积分可在积分商城进行兑换使用，实物奖励不
-            产生积分。
-          </li>
-          <li>OG东方保留对本活动的最终解释权。</li>
-        </ol>
-      </div>
-    </main>
+        <div class="event-content__container">
+          <div class="event-content__header">
+            <hr />
+            <h3 class="event-content__title">活动内容</h3>
+            <hr />
+          </div>
+          <p class="event-content">
+            活动期间，用户于单日累计有效投注5888元可累计抽奖次数1次，并获得58元彩金奖励，还能参与九宫抽大奖活动，就有机会将
+            iPhone 11带回家。(每日最多3次，累计次数每日归零)
+          </p>
+        </div>
+        <!-- Lottery -->
+        <div class="lottery">
+          <!-- Lottery Info | 會員帳號、抽獎機會 -->
+          <div class="lottery__header">
+            <span class="lottery__info"
+              >会员帐号：<span id="memberId"></span
+            ></span>
+            <span class="lottery__info"
+              >您有
+              <span id="numberAwards" class="lottery__info_count"></span>
+              次抽奖机会！</span
+            >
+          </div>
+          <div class="lottery__main">
+            <div class="lottery-game__container">
+              <div class="lottery-game__container_inner grid">
+                <img
+                  data-order="0"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+                <img
+                  data-order="1"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+                <img
+                  data-order="2"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+                <img
+                  data-order="7"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+                <img
+                  id="startButton"
+                  class="lottery-box__button is-active"
+                  src="img/lottery-box__button.png"
+                  alt="lottery prize"
+                />
+                <img
+                  data-order="3"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+                <img
+                  data-order="6"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+                <img
+                  data-order="5"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+                <img
+                  data-order="4"
+                  class="lottery-box"
+                  src="./img/lottery-box-5.png"
+                  alt="lottery prize"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="event-bonus">
+          <div class="subtitle">奖励内容</div>
+          <!-- Event Bonus | 獎勵內容表格(品項、價值) -->
+          <table class="event-bonus__table" cellspacing="20">
+            <tr>
+              <th>奖励内容</th>
+              <th>奖励价值</th>
+            </tr>
+            <tr>
+              <td>IPhone 11 64GB</td>
+              <td>5499元</td>
+            </tr>
+            <tr>
+              <td>华为 HUAWEI P30 8GB+128GB</td>
+              <td>3288元</td>
+            </tr>
+            <tr>
+              <td>Apple AirPods Pro</td>
+              <td>1999元</td>
+            </tr>
+            <tr>
+              <td>OG订制感恩礼包</td>
+              <td>888元</td>
+            </tr>
+            <tr>
+              <td>588元</td>
+              <td>588元</td>
+            </tr>
+            <tr>
+              <td>288元</td>
+              <td>288元</td>
+            </tr>
+            <tr>
+              <td>88元</td>
+              <td>88元</td>
+            </tr>
+            <tr>
+              <td>8元</td>
+              <td>8元</td>
+            </tr>
+          </table>
+        </div>
+        <!-- Event Rule | 抽獎注意事項 -->
+        <div class="event-rule">
+          <div class="subtitle">注意事项</div>
+          <ol>
+            <li>
+              活动彩金系统自动派发至用户游戏账号，仅需完成2倍流水即可提款。
+            </li>
+            <li>
+              实物奖励需联系客服申请，请用户至官网完善您的个人信息(银行卡、手机号以及邮箱号，邮寄地址信息（省→市→区（乡）→街道（村）→小区（组）→楼号→单元→门牌号）以便安排派送。
+            </li>
+            <li>本活动所需投注不与其他活动共享。</li>
+            <li>
+              每位用户每日可以获得所获彩金0.5%的积分奖励（取整数，非四舍五入），所获积分可在积分商城进行兑换使用，实物奖励不
+              产生积分。
+            </li>
+            <li>OG东方保留对本活动的最终解释权。</li>
+          </ol>
+        </div>
+      </main>
+    </div>
     <!-- Popup -->
     <div id="popupContainer" class="popup__container">
       <!-- <div id="popup" class="popup">
@@ -179,6 +183,11 @@
         <button class="popup__button">确定</button>
       </div> -->
       <div id="popupMask"></div>
+    </div>
+    <!-- Loading -->
+    <div id="loader">
+      <img class="loading-img" src="img/loading.gif" />
+      <span class="loading-text">努力加载中...</span>
     </div>
   </body>
 </html>

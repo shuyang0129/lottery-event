@@ -6,6 +6,9 @@
 
 #event {
   visibility: hidden;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  width: 100%;
 
   &.is-active {
     visibility: visible;

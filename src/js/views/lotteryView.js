@@ -14,6 +14,8 @@ export const renderNumberAwards = num => {
 
 // 渲染會員帳號
 export const renderMemberId = (id, isLogin = false) => {
+  console.log('renderMemberId -> id', id)
+
   memberId.textContent = isLogin ? `会员帐号：${id}` : '请登入会员'
 }
 

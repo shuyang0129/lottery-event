@@ -2,6 +2,14 @@ import axios from './axiosConfig'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
+/**
+ * @description
+ * actId: 750 活動ID
+ * drawBlockTick: 10 抽獎間隔
+ * loginName: "b02test003" 登入帳號
+ * numberAwards: 0 剩餘抽獎次數
+ * numberAwardsDraw: 0 已抽獎次數
+ */
 export const getPlayerDrawInfo = async (actId = '', token = '') => {
   try {
     const res = await axios({
@@ -9,7 +17,8 @@ export const getPlayerDrawInfo = async (actId = '', token = '') => {
       headers: { token },
       data: { actId },
     })
-    console.log('getPlayerDrawInfo -> res', res)
+    if (isDevelopment) console.log('getPlayerDrawInfo -> data', res.data)
+    return res.data
   } catch (err) {
     if (isDevelopment) console.error('Catch Error: ', err)
   }
@@ -21,7 +30,8 @@ export const getSearchActivityPageInformation = async id => {
       url: '/act-temp/searchActivityPageInformation',
       data: { id },
     })
-    console.log('getSearchActivityPageInformation -> data', data)
+    if (isDevelopment)
+      console.log('getSearchActivityPageInformation -> data', data)
     return data
   } catch (err) {
     if (isDevelopment) console.error('Catch Error: ', err)
@@ -35,7 +45,7 @@ export const draw = async (actId, time, token) => {
       headers: { token },
       data: { actId, time },
     })
-    console.log('draw -> data', data)
+    if (isDevelopment) console.log('draw -> data', data)
     return data
   } catch (err) {
     if (isDevelopment) console.error('Catch Error: ', err)

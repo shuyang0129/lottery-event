@@ -45,7 +45,7 @@
             <!-- Lottery Info | 會員帳號 -->
             <div class="lottery__info_account">
               <span id="memberId">请登入会员</span>
-              <button id="myAwards">我的奖品</button>
+              <button id="showAwardHistory">我的奖品</button>
             </div>
             <!-- Lottery Info | 抽獎機會 -->
             <div class="lottery__info_count">
@@ -56,25 +56,25 @@
                 <img
                   data-order="0"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
                 <img
                   data-order="1"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
                 <img
                   data-order="2"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
                 <img
                   data-order="7"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
                 <img
@@ -86,25 +86,25 @@
                 <img
                   data-order="3"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
                 <img
                   data-order="6"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
                 <img
                   data-order="5"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
                 <img
                   data-order="4"
                   class="lottery-box"
-                  src="./img/lottery-box-5.png"
+                  src="./img/lottery-box-0.png"
                   alt="lottery prize"
                 />
               </div>
@@ -175,11 +175,34 @@
     </div>
     <!-- Popup -->
     <div id="popupContainer" class="popup__container">
-      <!-- <div id="popup" class="popup">
-        <h3 class="popup__title">登入</h3>
-        <p class="popup__content">请先登入会员</p>
-        <button class="popup__button">确定</button>
-      </div> -->
+      <div id="popupMask"></div>
+    </div>
+    <!-- Check how many awards -->
+    <div id="awardHistory"" class="award-history__container">
+      <div class="award-history">
+        <div class="award-history__content">
+          <!-- <p class="no-awards">目前尚无获得奖品</p> -->
+          <table class="award-history__table" cellspacing="20">
+            <tr>
+              <th>奖品</th>
+              <th>数量</th>
+            </tr>
+            <tr>
+              <td>华为 HUAWEI P30</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>Apple AirPods Pro</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>288元</td>
+              <td>3</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <img class="close-button" src="img/close-button.png" />
       <div id="popupMask"></div>
     </div>
     <!-- Loading -->

@@ -78,26 +78,10 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', async () => {
   renderLoader() // 顯示 Loading...
 
-  // Fetch playerDrawInfo(會員抽獎資訊)、searchActivityPageInformation(獎項資訊) api
-  const [
-    // playerDrawInfoResponse,
-    searchActivityPageInformationResponse,
-  ] = await Promise.all([
-    // API.getPlayerDrawInfo(query.actId, query.token),
-    API.getSearchActivityPageInformation(query.actId),
-  ])
-
+  // 更新PageInfo
+  await updatePrizes(query.actId)
   // 更新PlayerDrawInfo
   await updatePlayerDrawInfo(query.actId, query.token)
-
-  if (searchActivityPageInformationResponse.code === 0) {
-    const lotteryInfo = searchActivityPageInformationResponse.data
-    // 取得獎項，取得八個獎項，以避免錯誤
-    prizes = lotteryInfo.actRuleDetailItemDTOList.slice(0, 8)
-
-    // 建立Lottery類
-    lottery = new Lottery(prizes)
-  }
 
   clearLoader() // 移除 Loading...
   renderPage() // 顯示畫面
@@ -181,7 +165,6 @@ const start = async () => {
 
     // 執行開獎
     lotteryRun()
-    numberAwardsLeft-- // 少一次抽獎次數，可以在這裡更新抽獎次數
     renderNumberAwards(numberAwardsLeft) // 更新畫面 - 抽獎次數
   }
 }
@@ -197,6 +180,8 @@ const calculateExtraSteps = (prizeIds, targetId) => {
 const resetToNotLogin = () => {
   isLogin = false
   memberId = ''
+  numberAwardsLeft = 0
+  numberAwardsTotal = 0
   renderMemberId(memberId, isLogin) // 會員帳號
   renderNumberAwards(0) // 抽獎次數
 }
@@ -217,6 +202,21 @@ const updatePlayerDrawInfo = async (actId, token) => {
     renderNumberAwards(numberAwardsLeft) // 抽獎次數
   } else {
     resetToNotLogin()
+  }
+}
+
+const updatePrizes = async actId => {
+  const searchActivityPageInformationResponse = await API.getSearchActivityPageInformation(
+    actId
+  )
+
+  if (searchActivityPageInformationResponse.code === 0) {
+    const lotteryInfo = searchActivityPageInformationResponse.data
+    // 取得獎項，取得八個獎項，以避免錯誤
+    prizes = lotteryInfo.actRuleDetailItemDTOList.slice(0, 8)
+
+    // 建立Lottery類
+    lottery = new Lottery(prizes)
   }
 }
 

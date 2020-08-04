@@ -6,7 +6,9 @@ const goLogin = () => {
 
 const closePopup = e => {
   e.preventDefault()
-  popupContainer.innerHTML = '<div id="popupMask"></div>'
+  // popupContainer.innerHTML = '<div id="popupMask"></div>'
+  const pop = document.querySelector('.popup')
+  if (pop) pop.parentElement.removeChild(pop)
   popupContainer.classList.remove('is-active')
 }
 

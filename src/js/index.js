@@ -1,11 +1,13 @@
 import '../css/index.scss'
 import Lottery from './models/Lottery'
 import { renderPopup } from './views/popupView'
+import { renderShowAwardHistory } from './views/awardHistory'
 import {
   startButton,
   renderPage,
   renderLoader,
   clearLoader,
+  showAwardButton,
 } from './views/base'
 import {
   renderNumberAwards,
@@ -70,6 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const [key, value] of urlParams.entries()) {
     query[key] = value
   }
+  console.log(query)
 
   if (isDevelopment) console.log('query', query)
 })
@@ -77,6 +80,8 @@ window.addEventListener('DOMContentLoaded', () => {
 // 畫面剛載入，渲染對應畫面
 window.addEventListener('load', async () => {
   renderLoader() // 顯示 Loading...
+
+  await API.getPlayerDrawResult(query.actId, query.token)
 
   // 更新PageInfo
   await updatePrizes(query.actId)
@@ -222,3 +227,22 @@ const updatePrizes = async actId => {
 
 // 點擊「開始」按鈕的行為定義
 startButton.addEventListener('click', start)
+
+// 點擊「我的獎品」按鈕的行為定義
+showAwardButton.addEventListener('click', () => {
+  const awards = [
+    {
+      prizeName: '华为 HUAWEI P30',
+      count: 1,
+    },
+    {
+      prizeName: 'Apple AirPods Pro',
+      count: 1,
+    },
+    {
+      prizeName: '288元',
+      count: 1,
+    },
+  ]
+  renderShowAwardHistory(awards)
+})

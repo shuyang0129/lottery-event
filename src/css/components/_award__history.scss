@@ -40,10 +40,10 @@
   }
 
   .close-button {
+    padding-top: 36px;
     width: 36px;
-    height: 36px;
-
-    object-fit: contain;
+    background: transparent url('../img/close-button.png') no-repeat center;
+    background-size: contain;
   }
 }
 
@@ -72,7 +72,8 @@
     border-spacing: 0 8px;
     border-collapse: separate;
 
-    & th, & td {
+    & th,
+    & td {
       padding: 8px;
       color: #000;
       text-align: center;

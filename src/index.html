@@ -45,7 +45,7 @@
             <!-- Lottery Info | 會員帳號 -->
             <div class="lottery__info_account">
               <span id="memberId">请登入会员</span>
-              <button id="showAwardHistory">我的奖品</button>
+              <button id="showAwardButton">我的奖品</button>
             </div>
             <!-- Lottery Info | 抽獎機會 -->
             <div class="lottery__info_count">
@@ -180,9 +180,9 @@
     <!-- Check how many awards -->
     <div id="awardHistory"" class="award-history__container">
       <div class="award-history">
-        <div class="award-history__content">
+        <div id="awardHistoryContent" class="award-history__content">
           <!-- <p class="no-awards">目前尚无获得奖品</p> -->
-          <table class="award-history__table" cellspacing="20">
+          <!-- <table class="award-history__table" cellspacing="20">
             <tr>
               <th>奖品</th>
               <th>数量</th>
@@ -199,10 +199,10 @@
               <td>288元</td>
               <td>3</td>
             </tr>
-          </table>
+          </table> -->
         </div>
       </div>
-      <img class="close-button" src="img/close-button.png" />
+      <button id="closeButton" class="close-button"></button>
       <div id="popupMask"></div>
     </div>
     <!-- Loading -->

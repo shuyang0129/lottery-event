@@ -51,3 +51,17 @@ export const draw = async (actId, time, token) => {
     if (isDevelopment) console.error('Catch Error: ', err)
   }
 }
+
+export const getPlayerDrawResult = async (actId, time, token) => {
+  try {
+    const { data } = await axios({
+      url: '/act-temp/playerDrawResult',
+      headers: { token },
+      data: { actId, time },
+    })
+    if (isDevelopment) console.log('getPlayerDrawResult -> data', data)
+    return data
+  } catch (err) {
+    if (isDevelopment) console.error('Catch Error: ', err)
+  }
+}

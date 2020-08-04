@@ -10,6 +10,13 @@ export const eventPage = document.querySelector('#event')
 export const eventTime = document.querySelector('#eventTime')
 export const eventTarget = document.querySelector('#eventTarget')
 export const eventPlatform = document.querySelector('#eventPlatform')
+export const showAwardButton = document.querySelector('#showAwardButton')
+export const awardHistory = document.querySelector('#awardHistory')
+export const awardHistoryContent = document.querySelector(
+  '#awardHistoryContent'
+)
+export const closeButton = document.querySelector('#closeButton')
+
 const loader = document.querySelector('#loader')
 
 // Lottery Box | 對應的燈箱

@@ -1,7 +1,26 @@
 import { popupContainer, popupMask, popupButton } from './base'
 
 const goLogin = () => {
-  console.log('Go to Login')
+  const query = new URLSearchParams(window.location.search)
+  const accessMode = query.get('accessMode')
+  const osType = query.get('osType')
+  const referrer = query.get('referrer') | ''
+
+  if (accessMode == 'H5') {
+    let str = document.referrer
+    if (str != null && !str.endsWith('/')) {
+      str += '/'
+    }
+    parent.location.href = document.referrer + '#/login'
+  }
+  if (accessMode == 'APP') {
+    if (osType == 'IOS') {
+      responseSwift('http://www.ogdfty.com/login')
+    }
+    if (osType == 'ANDROID') {
+      parent.location.href = 'http://www.ogdfty.com/login'
+    }
+  }
 }
 
 const closePopup = e => {
@@ -57,5 +76,5 @@ export const renderPopup = ({ markup, callback }) => {
   popupContainer.classList.add('is-active')
 
   document.querySelector('#popupButton').addEventListener('click', callback)
-  popupMask.addEventListener('click', closePopup)
+  // popupMask.addEventListener('click', closePopup)
 }

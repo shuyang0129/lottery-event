@@ -52,12 +52,12 @@ export const draw = async (actId, time, token) => {
   }
 }
 
-export const getPlayerDrawResult = async (actId, time, token) => {
+export const getPlayerDrawResult = async (actId, token) => {
   try {
     const { data } = await axios({
       url: '/act-temp/playerDrawResult',
       headers: { token },
-      data: { actId, time },
+      data: { actId },
     })
     if (isDevelopment) console.log('getPlayerDrawResult -> data', data)
     return data

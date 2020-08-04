@@ -29,7 +29,7 @@ export const renderShowAwardHistory = (awards = undefined) => {
         award => `
       <tr>
         <td>${award.prizeName}</td>
-        <td>${award.count}</td>
+        <td>1</td>
       </tr>
       `
       )

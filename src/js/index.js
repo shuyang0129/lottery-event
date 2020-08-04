@@ -229,20 +229,9 @@ const updatePrizes = async actId => {
 startButton.addEventListener('click', start)
 
 // 點擊「我的獎品」按鈕的行為定義
-showAwardButton.addEventListener('click', () => {
-  const awards = [
-    {
-      prizeName: '华为 HUAWEI P30',
-      count: 1,
-    },
-    {
-      prizeName: 'Apple AirPods Pro',
-      count: 1,
-    },
-    {
-      prizeName: '288元',
-      count: 1,
-    },
-  ]
+showAwardButton.addEventListener('click', async () => {
+  const res = await API.getPlayerDrawResult(query.actId, query.token)
+  const awards = res.code === 0 ? res.data.resultArr : undefined
+
   renderShowAwardHistory(awards)
 })

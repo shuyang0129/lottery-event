@@ -16,6 +16,7 @@ import {
   renderEventInfo,
 } from './views/lotteryView'
 import { popupTypes } from './views/popupView'
+import axios from 'axios'
 import * as API from './services/api'
 
 // 是否在測試環境
@@ -60,7 +61,17 @@ let lastTime
 // 抽獎間隔設定
 let lotteryDuration = 5000
 
-// Query String | actId, appKey, accessMode, token, preUrl, deviceId, referrer
+/**
+ * @name Query String
+ * @description
+ * actId 活動ID
+ * appKey 租戶appKey
+ * accessMode 區別app端或web端，H5/app
+ * token
+ * preUrl api的baseUrl
+ * devideId
+ * referrer 上一頁路徑
+ */
 const query = {}
 
 // 用來存放實體化Lottery物件的變數
@@ -72,7 +83,11 @@ window.addEventListener('DOMContentLoaded', () => {
   for (const [key, value] of urlParams.entries()) {
     query[key] = value
   }
-  console.log(query)
+
+  axios.defaults.baseURL = query.preUrl + '/office-activity/api'
+  axios.defaults.headers['appKey'] = query.appKey
+  axios.defaults.headers['accessMode'] = query.accessMode
+  axios.defaults.headers['Content-Type'] = 'application/json'
 
   if (isDevelopment) console.log('query', query)
 })
@@ -81,20 +96,15 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', async () => {
   renderLoader() // 顯示 Loading...
 
-  await API.getPlayerDrawResult(query.actId, query.token)
-
-  // 更新PageInfo
+  // 更新PageInfo | 將九宮格照api回傳的id補滿抽獎機會
   await updatePrizes(query.actId)
-  // 更新PlayerDrawInfo
+  // 更新PlayerDrawInfo | 抽獎次數、會員帳號
   await updatePlayerDrawInfo(query.actId, query.token)
 
   clearLoader() // 移除 Loading...
   renderPage() // 顯示畫面
 
   // 更新畫面
-  renderNumberAwards(numberAwardsLeft) // 抽獎次數
-  renderMemberId(memberId, isLogin) // 會員帳號
-  renderPrizes(lottery.sortedIds) // 抽獎機會
   renderEventInfo(eventInfo) // 活動資訊：活動日期、活動目標、活動平台
 })
 
@@ -106,7 +116,7 @@ const lotteryRun = async () => {
   if (currentSteps >= minSteps + extraSteps) {
     lastTime = Date.now()
 
-    // 更新PlayerDrawInfo
+    // 更新PlayerDrawInfo(更新抽獎次數)
     updatePlayerDrawInfo(query.actId, query.token)
 
     return (isRunning = false)
@@ -147,7 +157,7 @@ const start = async () => {
     return renderPopup(popupTypes.NO_NUMBER_OF_AWARDS)
   }
 
-  // 如果抽獎間隔小於十秒，顯示彈出視窗「操作过快，每次抽奖请间隔10秒后再操作」
+  // 如果抽獎間隔小於五秒，顯示彈出視窗「操作过快，每次抽奖请间隔10秒后再操作」
   const now = Date.now()
   if (lastTime && now - lastTime < lotteryDuration) {
     return renderPopup(popupTypes.NOT_ENOUGH_DURATION)
@@ -188,28 +198,33 @@ const resetToNotLogin = () => {
   numberAwardsLeft = 0
   numberAwardsTotal = 0
   renderMemberId(memberId, isLogin) // 會員帳號
-  renderNumberAwards(0) // 抽獎次數
+  renderNumberAwards(numberAwardsLeft) // 抽獎次數
 }
 
+// 更新playerDrawInfo
 const updatePlayerDrawInfo = async (actId, token) => {
   const playerDrawInfoResponse = await API.getPlayerDrawInfo(actId, token)
   // 更新會員資訊
   if (playerDrawInfoResponse.code === 0 && !!token) {
     const playerInfo = playerDrawInfoResponse.data
+    // 更改登入狀態為：已登入
     isLogin = true
     // 更新抽獎剩餘次數(numberAwardsLeft)、最大抽獎次數(numberAwardsTotal)
     numberAwardsTotal = playerInfo.numberAwards
     numberAwardsLeft = playerInfo.numberAwards - playerInfo.numberAwardsDraw
-    if (numberAwardsLeft < 0) numberAwardsLeft = 0
+    if (numberAwardsLeft < 0) numberAwardsLeft = 0 // 避免負數
     // 更新會員帳號
     memberId = playerInfo.loginName
-    renderMemberId(memberId, isLogin) // 會員帳號
-    renderNumberAwards(numberAwardsLeft) // 抽獎次數
+
+    renderMemberId(memberId, isLogin) // DOM渲染，會員帳號
+    renderNumberAwards(numberAwardsLeft) // DOM渲染，抽獎次數
   } else {
+    // 如果沒有取得會員資訊，將畫面設為沒有登入狀態
     resetToNotLogin()
   }
 }
 
+// 更新九宮格
 const updatePrizes = async actId => {
   const searchActivityPageInformationResponse = await API.getSearchActivityPageInformation(
     actId
@@ -217,11 +232,12 @@ const updatePrizes = async actId => {
 
   if (searchActivityPageInformationResponse.code === 0) {
     const lotteryInfo = searchActivityPageInformationResponse.data
-    // 取得獎項，取得八個獎項，以避免錯誤
+    // 取得獎項，過濾八個以外的獎項，避免錯誤
     prizes = lotteryInfo.actRuleDetailItemDTOList.slice(0, 8)
 
-    // 建立Lottery類
+    // 建立Lottery物件
     lottery = new Lottery(prizes)
+    renderPrizes(lottery.sortedIds) // 將九宮格照api回傳的id補滿抽獎機會
   }
 }
 
@@ -233,5 +249,5 @@ showAwardButton.addEventListener('click', async () => {
   const res = await API.getPlayerDrawResult(query.actId, query.token)
   const awards = res.code === 0 ? res.data.resultArr : undefined
 
-  renderShowAwardHistory(awards)
+  renderShowAwardHistory(awards) // DOM渲染，我的獎品
 })

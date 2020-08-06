@@ -1,4 +1,5 @@
-import axios from './axiosConfig'
+// import axios from './axiosConfig'
+import axios from 'axios'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -13,6 +14,7 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 export const getPlayerDrawInfo = async (actId = '', token = '') => {
   try {
     const res = await axios({
+      method: 'POST',
       url: '/act-temp/playerDrawInfo',
       headers: { token },
       data: { actId },
@@ -27,6 +29,7 @@ export const getPlayerDrawInfo = async (actId = '', token = '') => {
 export const getSearchActivityPageInformation = async id => {
   try {
     const { data } = await axios({
+      method: 'POST',
       url: '/act-temp/searchActivityPageInformation',
       data: { id },
     })
@@ -41,6 +44,7 @@ export const getSearchActivityPageInformation = async id => {
 export const draw = async (actId, time, token) => {
   try {
     const { data } = await axios({
+      method: 'POST',
       url: '/act-temp/draw',
       headers: { token },
       data: { actId, time },
@@ -55,6 +59,7 @@ export const draw = async (actId, time, token) => {
 export const getPlayerDrawResult = async (actId, token) => {
   try {
     const { data } = await axios({
+      method: 'POST',
       url: '/act-temp/playerDrawResult',
       headers: { token },
       data: { actId },

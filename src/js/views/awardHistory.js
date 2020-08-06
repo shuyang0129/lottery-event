@@ -24,16 +24,28 @@ export const renderShowAwardHistory = (awards = undefined) => {
   if (awards && awards.length > 0) {
     // 如果有獎項
     // 1) 組出table需要使用的html內容
-    const replacement = awards
-      .map(
-        award => `
+
+    let replacement = ''
+
+    for (const [prizeName, count] of Object.entries(sumAwards(awards))) {
+      replacement += `
       <tr>
-        <td>${award.prizeName}</td>
-        <td>1</td>
+        <td>${prizeName}</td>
+        <td>${count}</td>
       </tr>
       `
-      )
-      .join('')
+    }
+
+    // const replacement = awards
+    //   .map(
+    //     award => `
+    //   <tr>
+    //     <td>${award.prizeName}</td>
+    //     <td>1</td>
+    //   </tr>
+    //   `
+    //   )
+    //   .join('')
 
     // 2) 取得template
     markup = contentType.WITH_CONTENT.markup
@@ -54,3 +66,12 @@ closeButton.addEventListener('click', () => {
   awardHistoryContent.innerHTML = ''
   awardHistory.classList.remove('is-active')
 })
+
+const sumAwards = awards => {
+  const awardObj = {}
+  awards.forEach(({ prizeName }) => {
+    if (prizeName in awardObj) return (awardObj[prizeName] += 1)
+    awardObj[prizeName] = 1
+  })
+  return awardObj
+}

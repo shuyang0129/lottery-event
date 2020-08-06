@@ -15,6 +15,9 @@ export const awardHistory = document.querySelector('#awardHistory')
 export const awardHistoryContent = document.querySelector(
   '#awardHistoryContent'
 )
+export const popupMaskAwardHistory = document.querySelector(
+  '#popupMaskAwardHistory'
+)
 export const closeButton = document.querySelector('#closeButton')
 
 const loader = document.querySelector('#loader')

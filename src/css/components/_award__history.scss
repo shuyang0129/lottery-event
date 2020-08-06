@@ -19,7 +19,7 @@
     display: flex;
   }
 
-  #popupMask {
+  #popupMaskAwardHistory {
     position: fixed;
     top: 0;
     right: 0;
@@ -73,8 +73,7 @@
     border-spacing: 0 8px;
     border-collapse: separate;
 
-    & th,
-    & td {
+    & th, & td {
       padding: 8px;
       color: #000;
       text-align: center;

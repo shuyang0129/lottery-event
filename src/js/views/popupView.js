@@ -21,11 +21,11 @@ const goLogin = () => {
       parent.location.href = 'http://www.ogdfty.com/login'
     }
   }
+  // Close popup
+  closePopup()
 }
 
-const closePopup = e => {
-  e.preventDefault()
-  // popupContainer.innerHTML = '<div id="popupMask"></div>'
+const closePopup = () => {
   const pop = document.querySelector('.popup')
   if (pop) pop.parentElement.removeChild(pop)
   popupContainer.classList.remove('is-active')
@@ -76,5 +76,5 @@ export const renderPopup = ({ markup, callback }) => {
   popupContainer.classList.add('is-active')
 
   document.querySelector('#popupButton').addEventListener('click', callback)
-  // popupMask.addEventListener('click', closePopup)
+  popupMask.addEventListener('click', closePopup)
 }

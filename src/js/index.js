@@ -182,6 +182,10 @@ const start = async () => {
     lotteryRun()
     renderNumberAwards(numberAwardsLeft) // 更新畫面 - 抽獎次數
   }
+  if (drawResponse.code === 16110000) {
+    resetToNotLogin()
+    return renderPopup(popupTypes.NOT_LOGIN)
+  }
 }
 
 // 計算到指定獎項的額外步數
@@ -248,6 +252,8 @@ startButton.addEventListener('click', start)
 showAwardButton.addEventListener('click', async () => {
   const res = await API.getPlayerDrawResult(query.actId, query.token)
   const awards = res.code === 0 ? res.data.resultArr : undefined
+
+  if (res.code === 16110000) resetToNotLogin()
 
   renderShowAwardHistory(awards) // DOM渲染，我的獎品
 })

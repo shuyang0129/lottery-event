@@ -57,10 +57,10 @@ export default class Lottery {
     // return this.prizes
   }
 
-  // Getter | 依據prizeNum，排序後的獎項IDs
+  // Getter | 依據prizeNum，排序後的獎項IDs(後來沒有id，用prizeNum)
   get sortedIds() {
     const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
-    const onlyIds = ({ id }) => id
+    const onlyIds = ({ prizeNum }) => prizeNum
 
     if (this.prizes) return this.prizes.sort(sortByPrizeNum).map(onlyIds)
   }

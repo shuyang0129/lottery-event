@@ -50,18 +50,10 @@ export default class Lottery {
     return this.currentOrder >= 0 && this.currentOrder < this.length
   }
 
-  // Getter | 依據prizeNum，排序後的獎項
-  get sortedPrizes() {
-    const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
-    return this.prizes.sort(sortByPrizeNum)
-    // return this.prizes
-  }
+  // Getter | 取出純prizeNums
+  get prizeNums() {
+    const onlyPrizeNums = ({ prizeNum }) => prizeNum
 
-  // Getter | 依據prizeNum，排序後的獎項IDs(後來沒有id，用prizeNum)
-  get sortedIds() {
-    const sortByPrizeNum = (a, b) => a.prizeNum - b.prizeNum
-    const onlyIds = ({ prizeNum }) => prizeNum
-
-    if (this.prizes) return this.prizes.sort(sortByPrizeNum).map(onlyIds)
+    if (this.prizes) return this.prizes.map(onlyPrizeNums)
   }
 }

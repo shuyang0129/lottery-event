@@ -37,7 +37,7 @@ let eventInfo = {
 // 獎項列表
 let prizes = []
 // 指定獎項
-let targetPrizeId = ''
+let targetPrizeNum = undefined
 // 最大可抽獎次數
 let numberAwardsTotal = 0
 // 抽獎剩餘次數
@@ -117,7 +117,7 @@ const lotteryRun = async () => {
     lastTime = Date.now()
 
     // 更新PlayerDrawInfo(更新抽獎次數)
-    updatePlayerDrawInfo(query.actId, query.token)
+    await updatePlayerDrawInfo(query.actId, query.token)
 
     return (isRunning = false)
   }
@@ -173,10 +173,10 @@ const start = async () => {
   const drawResponse = await API.draw(query.actId, Date.now(), query.token)
 
   if (drawResponse.code === 0) {
-    // 把指定獎項轉為字串
-    targetPrizeId = `${drawResponse.data.ruleDetailId}`
+    // 取出指定獎項
+    targetPrizeNum = drawResponse.data.prizeNum
     // 開始前，計算後半段到獎項的步數
-    calculateExtraSteps(lottery.sortedIds, targetPrizeId)
+    calculateExtraSteps(lottery.prizeNums, targetPrizeNum)
 
     // 執行開獎
     lotteryRun()
@@ -189,9 +189,9 @@ const start = async () => {
 }
 
 // 計算到指定獎項的額外步數
-const calculateExtraSteps = (prizeIds, targetId) => {
-  if (targetId && prizeIds.includes(targetId)) {
-    return (extraSteps += prizeIds.indexOf(targetId) + PRIZES_LENGTH * 1) // PRIZES_LENGTH代表一圈
+const calculateExtraSteps = (prizeNums, targetPrizeNum) => {
+  if (targetPrizeNum && prizeNums.includes(targetPrizeNum)) {
+    return (extraSteps += prizeNums.indexOf(targetPrizeNum) + PRIZES_LENGTH * 1) // PRIZES_LENGTH代表一圈
   }
 }
 
@@ -241,7 +241,7 @@ const updatePrizes = async actId => {
 
     // 建立Lottery物件
     lottery = new Lottery(prizes)
-    renderPrizes(lottery.sortedIds) // 將九宮格照api回傳的id補滿抽獎機會
+    renderPrizes(lottery.prizeNums) // 將九宮格照api回傳的id補滿抽獎機會
   }
 }
 

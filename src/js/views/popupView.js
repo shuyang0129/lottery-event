@@ -2,9 +2,13 @@ import { popupContainer, popupMask, popupButton } from './base'
 
 const goLogin = () => {
   const query = new URLSearchParams(window.location.search)
-  const accessMode = query.get('accessMode')
-  const osType = query.get('osType')
+  const accessMode = query.get('accessMode').toUpperCase()
+  const osType = query.get('osType').toUpperCase()
   const referrer = query.get('referrer') | ''
+
+  const responseSwift = url => {
+    window.webkit.messageHandlers.AppModel.postMessage(url)
+  }
 
   if (accessMode == 'H5') {
     let str = document.referrer

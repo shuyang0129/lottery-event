@@ -88,6 +88,8 @@ window.addEventListener('DOMContentLoaded', () => {
   axios.defaults.headers['appKey'] = query.appKey
   axios.defaults.headers['accessMode'] = query.accessMode
   axios.defaults.headers['Content-Type'] = 'application/json'
+  axios.defaults.headers['If-Modified-Since'] = '0'
+  axios.defaults.headers['Cache-Control'] = 'no-cache'
 
   if (isDevelopment) console.log('query', query)
 })

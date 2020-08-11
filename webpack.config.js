@@ -5,8 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const pxtorem = require('postcss-plugin-px2rem')
 const Dotenv = require('dotenv-webpack')
+const ErudaWebapckPlugin = require('eruda-webpack-plugin')
 
 module.exports = {
+  mode: process.env.NODE_ENV,
   entry: ['@babel/polyfill', './src/js/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -31,6 +33,7 @@ module.exports = {
       path: `./.env.${process.env.NODE_ENV === 'production' ? 'prod' : 'dev'}`,
       systemvars: true, // 允許讀取 process.env 下的任意系統變量
     }),
+    new ErudaWebapckPlugin(),
   ],
   module: {
     rules: [

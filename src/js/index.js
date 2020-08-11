@@ -113,6 +113,7 @@ window.addEventListener('load', async () => {
 const lotteryRun = async () => {
   // 抽獎開始
   isRunning = true
+  startButton.disabled = true
 
   // 到達全部步數(minSteps + extraSteps)，停止
   if (currentSteps >= minSteps + extraSteps) {
@@ -121,7 +122,9 @@ const lotteryRun = async () => {
     // 更新PlayerDrawInfo(更新抽獎次數)
     await updatePlayerDrawInfo(query.actId, query.token)
 
-    return (isRunning = false)
+    isRunning = false
+    startButton.disabled = false
+    return
   }
 
   // 控制燈箱亮起的速度控制

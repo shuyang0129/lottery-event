@@ -16,6 +16,7 @@ import {
   renderEventInfo,
 } from './views/lotteryView'
 import { popupTypes } from './views/popupView'
+import { renderErrorPopup } from './views/errorView'
 import axios from 'axios'
 import * as API from './services/api'
 
@@ -117,7 +118,7 @@ const lotteryRun = async () => {
 
   // 到達全部步數(minSteps + extraSteps)，停止
   if (currentSteps >= minSteps + extraSteps) {
-    lastTime = Date.now()
+    // lastTime = Date.now()
 
     // 更新PlayerDrawInfo(更新抽獎次數)
     await updatePlayerDrawInfo(query.actId, query.token)
@@ -163,10 +164,10 @@ const start = async () => {
   }
 
   // 如果抽獎間隔小於五秒，顯示彈出視窗「操作过快，每次抽奖请间隔10秒后再操作」
-  const now = Date.now()
-  if (lastTime && now - lastTime < lotteryDuration) {
-    return renderPopup(popupTypes.NOT_ENOUGH_DURATION)
-  }
+  // const now = Date.now()
+  // if (lastTime && now - lastTime < lotteryDuration) {
+  //   return renderPopup(popupTypes.NOT_ENOUGH_DURATION)
+  // }
 
   // == 設定初始狀態(開始)
   currentSteps = 0
@@ -183,13 +184,23 @@ const start = async () => {
     // 開始前，計算後半段到獎項的步數
     calculateExtraSteps(lottery.prizeNums, targetPrizeNum)
 
+    // 如果找不到獎項，額外步數(extraSteps)為0的時候，顯示彈出視窗「很抱歉！实体奖项已发送完毕」
+    if (extraSteps === 0) return renderErrorPopup('很抱歉！实体奖项已发送完毕')
+
     // 執行開獎
     lotteryRun()
     renderNumberAwards(numberAwardsLeft) // 更新畫面 - 抽獎次數
-  }
-  if (drawResponse.code === 16110000) {
+  } else if (drawResponse.code === 16110000) {
+    // code: 16110000 => 使用者未登入
     resetToNotLogin()
     return renderPopup(popupTypes.NOT_LOGIN)
+  } else if (drawResponse.code === 11000022) {
+    // code: 11000022 => 請求過度頻繁
+    return renderPopup(popupTypes.NOT_ENOUGH_DURATION)
+  } else {
+    // 其他，用popup顯示回傳的message
+    const { message } = drawResponse
+    return renderErrorPopup(message)
   }
 }
 

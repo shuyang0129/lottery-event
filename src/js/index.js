@@ -163,7 +163,7 @@ const start = async () => {
     return renderPopup(popupTypes.NO_NUMBER_OF_AWARDS)
   }
 
-  // 如果抽獎間隔小於五秒，顯示彈出視窗「操作过快，每次抽奖请间隔10秒后再操作」
+  // 如果抽獎間隔小於五秒，顯示彈出視窗「操作过快，每次抽奖请间隔5秒后再操作」
   // const now = Date.now()
   // if (lastTime && now - lastTime < lotteryDuration) {
   //   return renderPopup(popupTypes.NOT_ENOUGH_DURATION)

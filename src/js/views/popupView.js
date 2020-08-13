@@ -2,8 +2,8 @@ import { popupContainer, popupMask, popupButton } from './base'
 
 const goLogin = () => {
   const query = new URLSearchParams(window.location.search)
-  const accessMode = query.get('accessMode').toUpperCase()
-  const osType = query.get('osType').toUpperCase()
+  const accessMode = query.get('accessMode')
+  const osType = query.get('osType')
   const referrer = query.get('referrer') | ''
 
   const responseSwift = url => {

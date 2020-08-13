@@ -36,17 +36,6 @@ export const renderShowAwardHistory = (awards = undefined) => {
       `
     }
 
-    // const replacement = awards
-    //   .map(
-    //     award => `
-    //   <tr>
-    //     <td>${award.prizeName}</td>
-    //     <td>1</td>
-    //   </tr>
-    //   `
-    //   )
-    //   .join('')
-
     // 2) 取得template
     markup = contentType.WITH_CONTENT.markup
     // 3) 將內容置入

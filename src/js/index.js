@@ -267,9 +267,14 @@ startButton.addEventListener('click', start)
 // 點擊「我的獎品」按鈕的行為定義
 showAwardButton.addEventListener('click', async () => {
   const res = await API.getPlayerDrawResult(query.actId, query.token)
-  const awards = res.code === 0 ? res.data.resultArr : undefined
 
-  if (res.code === 16110000) resetToNotLogin()
+  // 如果使用者沒有登入，顯示彈出視窗「請登入會員」
+  if (res.code === 16110000) {
+    resetToNotLogin()
+    return renderPopup(popupTypes.NOT_LOGIN)
+  }
+
+  const awards = res.code === 0 ? res.data.resultArr : undefined
 
   renderShowAwardHistory(awards) // DOM渲染，我的獎品
 })

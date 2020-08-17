@@ -79,6 +79,12 @@ const query = {}
 let lottery
 
 window.addEventListener('DOMContentLoaded', () => {
+  if (isDevelopment) {
+    console.log('--------------------')
+    console.log('更新時間')
+    console.log('2020/08/17 12:00 | Version No: 2020081702')
+    console.log('--------------------')
+  }
   // 取得Query String
   const urlParams = new URLSearchParams(window.location.search)
   for (const [key, value] of urlParams.entries()) {

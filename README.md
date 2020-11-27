@@ -1,3 +1,15 @@
-# webpack-starter
-webpack-starter
-# lottery-event
+# 九宮格抽獎頁面
+
+- [關於](#關於)
+- [使用技術](#使用技術)
+
+## 關於
+
+根據活動規則，使用者可以得到指定的抽獎次數，點擊抽獎後，九宮格跑馬燈動畫開始執行，並停在 API 指定的得獎獎項。
+
+## 使用技術
+
+- HTML
+- SCSS
+- JavaScript (ES6)
+- Webpack
